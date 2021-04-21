@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
+</head>
+
+<body>
+  <header>
+    <h1>Nomad News</h1>
+    <div>
+      <!-- if절 넣어서 받은 주소(order_by)에 따라 Popular, New 상태 바꾸기 -->
+      Order by:
+      {% if 'popular' in sort %}
+      <strong>Popular</strong>
+      |
+      <a href="/?order_by=new">New</a>
+      {% else %}
+      <a href="/?order_by=popular">Popular</a>
+      |
+      <strong>New</strong>
+      {% endif %}
+    </div>
+  </header>
+  <main>
+    {% for data in parse_data %}
+    <div>
+      <a href="/{{data.id}}">
+        <h3>{{data.title}}</h3>
+      </a>
+      (<a href="{{data.url}}" target="_blank">
+        {{data.url}}</a>)
+    </div>
+    <div>{{data.points}} points | By: {{data.author}} | {{data.comment_count}} comments</div>
+    <hr>
+    {% endfor %}
+
+  </main>
+
+</body>
+
+</html>

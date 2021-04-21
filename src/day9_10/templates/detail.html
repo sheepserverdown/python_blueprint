@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
+</head>
+
+<body>
+  <header>
+    <h1>{{parse_data.title}}</h1>
+    <div>{{parse_data.points}} points | By {{parse_data.author}} | <a href="{{parse_data.url}}" target="_blank">
+      {{parse_data.url}}
+      </a>
+    </div>
+  </header>
+  <main>
+  {% for data in parse_data['children'] %}
+    {% if data.text == None %}
+      <div>
+        [deleted]
+      </div>
+    {% else %}
+      <div>
+        <strong>{{data.author}}:</strong>
+        {% autoescape false %}
+        <p></p>
+        {{data.text}}
+        <p></p>
+        {% endautoescape %}
+      </div>
+    {% endif %}
+    <hr>
+  {% endfor %}
+  </main>
+  </body>
+</html>
